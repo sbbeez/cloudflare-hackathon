@@ -163,8 +163,8 @@ export default () => {
 
   const onSummarize = async () => {
     setSummaryLoading(true);
-    const response = await summarizeText(`${userId}.json`);
-    setSummary(response.summary);
+    const { response } = await summarizeText(`${userId}.json`);
+    setSummary(response);
     onOpenSummary();
     setSummaryLoading(false);
   };
@@ -237,6 +237,7 @@ export default () => {
               <h1 className="text-3xl">⬆️</h1>
               <h2>Upload Image File</h2>
               <p className="text-xs">.jpeg, .png, .webp images are supported</p>
+              <p className="text-xs"> Must be less than 1MB</p>
             </label>
             <input
               onChange={onImageSelect}
@@ -279,6 +280,7 @@ export default () => {
               <h1 className="text-3xl">⬆️</h1>
               <h2>Upload Audio File</h2>
               <p className="text-xs"> .webm, .mp3 formats are supported</p>
+              <p className="text-xs"> Must be less than 1MB</p>
             </label>
             <input
               onChange={onAudioSelect}

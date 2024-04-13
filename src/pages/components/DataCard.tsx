@@ -129,7 +129,7 @@ const DataCard = (props: any) => {
           {props.type === "audio" && <Tab>Audio</Tab>}
           {props.type === "text" && <Tab>Text Entered</Tab>}
           {props.type === "audio" && <Tab>Transcription</Tab>}
-          {props.type === "image" && <Tab>Descirption</Tab>}
+          {props.type === "image" && <Tab>Description</Tab>}
         </TabList>
 
         <TabPanels>
