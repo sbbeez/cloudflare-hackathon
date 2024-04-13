@@ -1,4 +1,3 @@
-import { getReadWriteUrl } from "@/service";
 import { Button } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { useState } from "react";
