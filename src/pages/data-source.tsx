@@ -198,16 +198,17 @@ export default () => {
   return (
     <div className="w-screen h-screen flex flex-col items-center p-5 gap-6">
       <h1 className="text-xl">Your Personal Medical Advisor</h1>
-      <h1 className="flex gap-5 flex-wrap justify-center">
-        User: {localStorage.getItem("userId")}{" "}
+      <div>
+        <h1 className="flex gap-1 flex-wrap justify-center">
+          Patient ID: <strong>{localStorage.getItem("userId")}</strong>{" "}
+        </h1>
         <p
           onClick={onChangeUser}
-          className="underline text-blue-500 cursor-pointer"
+          className="underline text-blue-500 cursor-pointer text-center"
         >
-          change user
+          change patient id
         </p>
-      </h1>
-
+      </div>
       <div className="flex gap-5 flex-wrap justify-center">
         <Button colorScheme="blue" onClick={onOpenText} variant="outline">
           Write Text ✍️
