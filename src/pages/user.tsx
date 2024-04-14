@@ -31,7 +31,7 @@ export default function Home() {
     }
   };
   return (
-    <div className="w-screen h-screen flex flex-col gap-5 justify-center items-center">
+    <div className="w-screen h-screen flex flex-col gap-1 justify-center items-center gabarito-400">
       <div className="flex flex-col gap-5 items-center p-5 rounded-xl border hover:shadow-xl transition-all w-[90%] lg:w-[50%] shadow">
         <Input
           placeholder="Enter Unique Patient ID"
@@ -55,7 +55,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="flex gap-3 m-5 flex-wrap">
+      <div className="flex gap-1 text-center flex-wrap">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/9/94/Cloudflare_Logo.png"
           width={30}
@@ -80,10 +80,10 @@ export default function Home() {
           Blog
         </a>
       </div>
-      <p className="m-5">
+      <p className="text-center mx-2 text-balance">
         No Rights Reserved - Public Domain | Solely Built for Hackathon
       </p>
-      <p className="m-5">
+      <p className="text-center mx-2 text-balance">
         All Data Are Publicly Accessible,{" "}
         <strong>
           Please Refrain From Entering Any Personal/Confidential Data

@@ -145,7 +145,7 @@ const DataCard = (props: any) => {
           )}
           <TabPanel>
             <>
-              {props.extractedText && <p>{props.extractedText}</p>}
+              {props.extractedText && <pre className="text-wrap gabarito-400">{props.extractedText}</pre>}
               {!props.extractedText && <p>Loading...</p>}
             </>
           </TabPanel>

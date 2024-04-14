@@ -333,7 +333,7 @@ export default () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Modal size={"full"} isOpen={isOpenSummary} onClose={onCloseSummary}>
+      <Modal size={"xl"} isOpen={isOpenSummary} onClose={onCloseSummary}>
         <ModalOverlay />
         <ModalContent
           marginLeft={100}
