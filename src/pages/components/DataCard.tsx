@@ -12,7 +12,7 @@ import _ from "lodash";
 
 const Badge = (props: { state: "loading" | "success"; title: string }) => {
   return (
-    <div className="px-5 py-2 rounded-xl border flex gap-3 items-center justify-center shadow bg-slate-300">
+    <div className="px-5 py-2 rounded-xl border flex gap-3 items-center justify-center shadow bg-slate-300 flex-wrap max-md:text-xs">
       <p>{props.title}</p>
       {props.state === "loading" && <Spinner />}
       {props.state === "success" && <p>✅</p>}
@@ -152,8 +152,8 @@ const DataCard = (props: any) => {
         </TabPanels>
       </Tabs>
       <hr className="my-5" />
-      <div className="flex justify-between items-center px-5">
-        <p className="font-light text-xs">
+      <div className="flex justify-between items-center">
+        <p className="font-light text-xs max-md:hidden">
           Created {moment(props.createdAt).fromNow()}
         </p>
         <div className="flex gap-5">

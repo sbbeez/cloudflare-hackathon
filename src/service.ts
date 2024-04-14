@@ -35,6 +35,11 @@ export const summarizeText = async (fileId: string): Promise<any> => {
   return response.data;
 };
 
+export const findDiagnosis = async (fileId: string): Promise<any> => {
+  const response = await httpClient.get(`/perform-fine-diagnosis/${fileId}`);
+  return response.data;
+};
+
 export const vectorizeData = async (
   extractedText: string,
   id: string,

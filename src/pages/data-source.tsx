@@ -1,4 +1,9 @@
-import { getReadUrl, getReadWriteUrl, summarizeText } from "@/service";
+import {
+  findDiagnosis,
+  getReadUrl,
+  getReadWriteUrl,
+  summarizeText,
+} from "@/service";
 import {
   Button,
   Modal,
@@ -16,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import DataCard from "./components/DataCard";
 import { nanoid } from "nanoid";
 import mime from "mime-types";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 export default () => {
   const userId = localStorage.getItem("userId");
@@ -28,11 +34,13 @@ export default () => {
   const [audioLoading, setAudioLoading] = useState(false);
   const [dataSourceLoading, setDataSourceLoading] = useState(true);
   const [summaryLoading, setSummaryLoading] = useState(false);
+  const [diagnosisLoading, setDiagnosisLoading] = useState(false);
 
   const [text, setText] = useState("");
   const [imageFile, setImageFile] = useState<any>(null);
   const [audioFile, setAudioFile] = useState<any>(null);
   const [summary, setSummary] = useState("");
+  const [diagnosis, setDiagnosis] = useState("");
 
   const fetchDataSource = async () => {
     setDataSourceLoading(true);
@@ -76,6 +84,12 @@ export default () => {
     isOpen: isOpenSummary,
     onOpen: onOpenSummary,
     onClose: onCloseSummary,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenDiagnosis,
+    onOpen: onOpenDiagnosis,
+    onClose: onCloseDiagnosis,
   } = useDisclosure();
 
   const updateDataSource = async (dataSource: { dataSet: any[] }) => {
@@ -163,10 +177,18 @@ export default () => {
 
   const onSummarize = async () => {
     setSummaryLoading(true);
-    const { response } = await summarizeText(`${userId}.json`);
-    setSummary(response);
+    const { summary } = await summarizeText(`${userId}.json`);
+    setSummary(summary);
     onOpenSummary();
     setSummaryLoading(false);
+  };
+
+  const onFindDiagnosis = async () => {
+    setDiagnosisLoading(true);
+    const { response } = await findDiagnosis(`${userId}.json`);
+    setDiagnosis(response);
+    onOpenDiagnosis();
+    setDiagnosisLoading(false);
   };
 
   const onAskQuestion = () => {
@@ -175,8 +197,8 @@ export default () => {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center p-5 gap-6">
-      <h1 className="text-xl">Your Personal Space</h1>
-      <h1 className="flex gap-5">
+      <h1 className="text-xl">Your Personal Medical Advisor</h1>
+      <h1 className="flex gap-5 flex-wrap justify-center">
         User: {localStorage.getItem("userId")}{" "}
         <p
           onClick={onChangeUser}
@@ -186,7 +208,7 @@ export default () => {
         </p>
       </h1>
 
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-wrap justify-center">
         <Button colorScheme="blue" onClick={onOpenText} variant="outline">
           Write Text ✍️
         </Button>
@@ -327,7 +349,41 @@ export default () => {
 
           <ModalFooter>
             <Button onClick={onCloseSummary} colorScheme="blue">
-              Awesome!
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal size={"full"} isOpen={isOpenDiagnosis} onClose={onCloseDiagnosis}>
+        <ModalOverlay />
+        <ModalContent
+          marginLeft={100}
+          marginRight={100}
+          marginTop={5}
+          marginBottom={5}
+          maxH={"max-content"}
+        >
+          <ModalHeader>Diagnosis From AI 🪄</ModalHeader>
+
+          <ModalBody>
+            {/* <h1 className="text-xl">{diagnosis}</h1> */}
+            <MarkdownPreview
+              className="p-5 overflow-auto markdown"
+              source={diagnosis}
+              style={{
+                background: "transparent",
+                all: "revert",
+                padding: "20px",
+              }}
+              wrapperElement={{
+                "data-color-mode": "light",
+              }}
+            />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button onClick={onCloseDiagnosis} colorScheme="blue">
+              Close
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -350,7 +406,7 @@ export default () => {
         )}
       </div>
       {!dataSourceLoading && dataSet?.dataSet?.length ? (
-        <div className="flex gap-5 items-center ">
+        <div className="flex gap-5 items-center m-5 flex-wrap justify-center">
           <Button
             onClick={onAskQuestion}
             colorScheme="blue"
@@ -366,7 +422,16 @@ export default () => {
             variant="solid"
             isLoading={summaryLoading}
           >
-            Summarize All 💫
+            Summarize 💫
+          </Button>
+          <Button
+            colorScheme="blue"
+            className="px-5 py-3"
+            onClick={onFindDiagnosis}
+            variant="solid"
+            isLoading={diagnosisLoading}
+          >
+            Find Diagnosis 💊
           </Button>
         </div>
       ) : (

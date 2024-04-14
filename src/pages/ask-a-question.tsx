@@ -22,7 +22,7 @@ export default () => {
   };
 
   return (
-    <div className="flex w-screen h-screen overflow-y-auto flex-col gap-5 font-mono items-center justify-center">
+    <div className="flex w-screen h-screen overflow-y-auto flex-col gap-5 font-mono items-center justify-center text-center">
       <img src="/qa-empty.svg" width={300} height={300} />
       <h1 className="text-5xl font-bold">Ask Questions</h1>
       {answer ? (
@@ -38,13 +38,13 @@ export default () => {
       )}
 
       <Input
-        placeholder="What is my puppy's name?"
+        placeholder="What are the symptoms?"
         autoFocus
         value={question}
         onChange={(event) => setQuestion(event.target.value)}
-        className="lg:max-w-[30%] max-w-[80%]"
+        className="lg:max-w-[30%] max-w-[80%] max-md:py-3"
       />
-      <div className="flex gap-3">
+      <div className="flex gap-3 m-5 flex-wrap justify-center">
         <Button
           onClick={() => {
             navigate("/data-source");
