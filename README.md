@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# Project Name
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Medical AI advisor app, built solely for cloudflare's AI hackthon. 
 
-Currently, two official plugins are available:
+To run this project you must also run https://github.com/sanjaysekaren/summarize-dataSources-ai-models.git as it has all the code related to API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## Expanding the ESLint configuration
+To run set up and run the project, follow these steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Run the frontend
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+git clone https://github.com/sbbeez/cloudflare-hackathon.git
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+cd cloudflare-hackthon
+
+npm i
+
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Run the Backend (API developed in workers AI)
+  - Make sure to set your own Env variables in .dev.vars file: - ACCESS_KEY_ID = - SECRET_ACCESS_KEY = - ACCOUNT_ID = - VECTORIZE_INDEX
+  - Create an R2 bucket in cloudflare (it is also s3 compatible) - BucketName should be 'cf-hackathon-ai'
+```bash
+git clone https://github.com/sanjaysekaren/summarize-dataSources-ai-models.git
+
+cd summarize-dataSources-ai-models
+
+npm i
+
+npm run dev
+```
+
+Note: the API url used in the client app is hard-coded, so you have to update it to localhost:port.
